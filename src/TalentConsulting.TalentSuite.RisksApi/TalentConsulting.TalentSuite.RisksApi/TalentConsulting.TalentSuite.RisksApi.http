@@ -1,0 +1,6 @@
+@TalentConsulting.TalentSuite.RisksApi_HostAddress = http://localhost:5056
+
+GET {{TalentConsulting.TalentSuite.RisksApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
