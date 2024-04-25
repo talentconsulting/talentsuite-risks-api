@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using TalentConsulting.TalentSuite.ReportsApi.Db;
+using TalentConsulting.TalentSuite.RisksApi.Db;
 using TalentConsulting.TalentSuite.RisksApi.Common.Dtos;
 
 namespace TalentConsulting.TalentSuite.RisksApi.Endpoints;
@@ -12,7 +12,6 @@ internal sealed class GetRiskEndpoint
         app.MapGet("/risks/{id:guid}", GetRisk)
             .Produces<Risk>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound)
-            .Produces(StatusCodes.Status400BadRequest)
             .WithTags("Risks")
             .WithDescription("Query for a specific Risk")
             .WithOpenApi();
@@ -25,10 +24,8 @@ internal sealed class GetRiskEndpoint
         CancellationToken cancellationToken)
     {
         var risk = await risksProvider.Fetch(id, cancellationToken);
-        var result = mapper.Map<Risk>(risk);
-
         return risk is null
             ? Results.NotFound()
-            : TypedResults.Ok(result);
+            : TypedResults.Ok(mapper.Map<Risk>(risk));
     }
 }

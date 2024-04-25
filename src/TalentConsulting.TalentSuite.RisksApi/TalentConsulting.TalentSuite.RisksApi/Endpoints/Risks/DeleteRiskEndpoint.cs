@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using TalentConsulting.TalentSuite.ReportsApi.Db;
+using TalentConsulting.TalentSuite.RisksApi.Db;
 using TalentConsulting.TalentSuite.RisksApi.Common.Dtos;
 
 namespace TalentConsulting.TalentSuite.RisksApi.Endpoints;

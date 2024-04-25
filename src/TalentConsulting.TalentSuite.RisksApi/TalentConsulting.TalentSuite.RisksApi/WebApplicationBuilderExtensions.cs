@@ -8,11 +8,8 @@ using Serilog;
 using Serilog.Events;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
-using TalentConsulting.TalentSuite.ReportsApi.Db;
-using RiskDto = TalentConsulting.TalentSuite.RisksApi.Common.Dtos.Risk;
-using PagingInfoDto = TalentConsulting.TalentSuite.RisksApi.Common.Dtos.PagingInfo;
 using TalentConsulting.TalentSuite.RisksApi.Db;
-using TalentConsulting.TalentSuite.RisksApi.Db.Entities;
+using RiskDto = TalentConsulting.TalentSuite.RisksApi.Common.Dtos.Risk;
 using TalentConsulting.TalentSuite.RisksApi.Common.Validators;
 using static TalentConsulting.TalentSuite.RisksApi.Endpoints.PostRiskEndpoint;
 using FluentValidation;
@@ -39,11 +36,7 @@ internal static partial class WebApplicationBuilderExtensions
         builder.ConfigureApplicationDependencies();
         builder.ConfigureHealthChecks(); // must come after db init
 
-        builder.Services.AddAutoMapper(config => {
-            config.CreateMap<Risk, RiskDto>().ReverseMap();
-            config.CreateMap(typeof(PagedResults<>), typeof(PagingInfoDto));
-            config.CreateMap<CreateRiskRequest, Risk>();
-        });
+        builder.Services.AddAutoMapper([typeof(WebApplicationBuilderExtensions).Assembly]);
     }
 
     private static void ConfigureSerilog(this WebApplicationBuilder builder)

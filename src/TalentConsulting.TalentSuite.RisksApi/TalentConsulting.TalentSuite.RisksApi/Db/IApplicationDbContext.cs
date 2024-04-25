@@ -14,7 +14,5 @@ internal interface IApplicationDbContext
     EntityEntry<TEntity> Remove<TEntity>(TEntity entity) where TEntity : class;
     DatabaseFacade Database { get; }
 
-    Task SetupTestData();
-
     Task Ping(CancellationToken cancellationToken);
 }

@@ -1,7 +1,7 @@
 ﻿using TalentConsulting.TalentSuite.RisksApi.Common.Models;
 using TalentConsulting.TalentSuite.RisksApi.Db.Entities;
 
-namespace TalentConsulting.TalentSuite.ReportsApi.Db;
+namespace TalentConsulting.TalentSuite.RisksApi.Db;
 
 internal interface IRisksProvider
 {

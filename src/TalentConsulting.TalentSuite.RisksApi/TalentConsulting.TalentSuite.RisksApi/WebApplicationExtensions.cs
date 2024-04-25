@@ -16,6 +16,7 @@ public static partial class WebApplicationExtensions
         PutRiskEndpoint.Register(app);
         DeleteRiskEndpoint.Register(app);
         GetReadinessEndpoint.Register(app);
+        GetInfoEndpoint.Register(app);
     }
 
     public static async Task Configure(this WebApplication app)

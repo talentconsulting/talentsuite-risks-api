@@ -11,7 +11,7 @@ public record struct Risk(
     Guid CreatedByUserId,
     DateTime CreatedWhen,
     Guid? ResolvedByReportId,
-    Guid? ResolvedBy,
+    Guid? ResolvedByUserId,
     DateTime? ResolvedWhen,
     RiskState State,
     RiskStatus Status

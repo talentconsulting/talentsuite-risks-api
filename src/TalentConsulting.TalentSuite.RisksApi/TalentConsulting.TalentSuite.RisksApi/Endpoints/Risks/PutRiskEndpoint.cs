@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using TalentConsulting.TalentSuite.ReportsApi.Db;
+using TalentConsulting.TalentSuite.RisksApi.Db;
 using TalentConsulting.TalentSuite.RisksApi.Db.Entities;
 using RiskDto = TalentConsulting.TalentSuite.RisksApi.Common.Dtos.Risk;
 

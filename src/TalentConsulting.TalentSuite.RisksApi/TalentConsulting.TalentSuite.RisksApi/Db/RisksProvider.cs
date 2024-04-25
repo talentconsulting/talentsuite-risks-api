@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TalentConsulting.TalentSuite.ReportsApi.Db;
 using TalentConsulting.TalentSuite.RisksApi.Common.Models;
 using TalentConsulting.TalentSuite.RisksApi.Db.Entities;
 
@@ -50,7 +49,6 @@ internal class RisksProvider(IApplicationDbContext context) : IRisksProvider
 
     public async Task<PagedResults<Risk>> FetchAllBy(Guid? projectId, SafePageParameters pagingInfo, CancellationToken cancellationToken)
     {
-        await context.SetupTestData();
         var entities = projectId.HasValue ? context.Risks.Where(x => x.ProjectId == projectId) : context.Risks;
         var totalCount = await entities.CountAsync(cancellationToken);
         
