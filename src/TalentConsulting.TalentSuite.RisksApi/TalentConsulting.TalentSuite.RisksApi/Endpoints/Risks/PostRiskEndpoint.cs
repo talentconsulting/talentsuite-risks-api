@@ -25,7 +25,7 @@ internal sealed class PostRiskEndpoint
     public static void Register(WebApplication app)
     {
         app.MapPost("/risks", CreateRisk)
-            .Produces(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status201Created)
             .Produces(StatusCodes.Status400BadRequest)
             .WithTags("Risks")
             .WithDescription("Query for a specific Risk")
