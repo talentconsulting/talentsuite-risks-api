@@ -34,50 +34,19 @@ internal class RisksProvider(IApplicationDbContext context) : IRisksProvider
         return true;
     }
 
-    //public async Task<Risk?> Update(Risk report, CancellationToken cancellationToken)
-    //{
-    //    var existingReport = await Fetch(report.Id, cancellationToken);
-    //    if (existingReport is null)
-    //    {
-    //        return null;
-    //    }
+    public async Task<Risk?> Update(Risk risk, CancellationToken cancellationToken)
+    {
+        var existingRisk = await Fetch(risk.Id, cancellationToken);
+        if (existingRisk is null)
+        {
+            return null;
+        }
 
-    //    context.Entry(existingReport).CurrentValues.SetValues(report);
-    //    foreach (var risk in report.Risks)
-    //    {
-    //        var existingRisk = existingReport.Risks.FirstOrDefault(r => r.Id == risk.Id);
-    //        if (existingRisk is null)
-    //        {
-    //            existingReport.Risks.Add(risk);
-    //        }
-    //        else
-    //        {
-    //            context.Entry(existingRisk).CurrentValues.SetValues(risk);
-    //        }
-    //    }
+        context.Entry(existingRisk).CurrentValues.SetValues(risk);
+        await context.SaveChangesAsync(cancellationToken);
 
-    //    foreach (var risk in existingReport.Risks)
-    //    {
-    //        if (!report.Risks.Any(r => r.Id == risk.Id))
-    //        {
-    //            context.Remove(risk);
-    //        }
-    //    }
-
-    //    var transaction = context.Database.BeginTransaction();
-    //    try
-    //    {
-    //        await context.SaveChangesAsync(cancellationToken);
-    //        await transaction.CommitAsync(cancellationToken);
-    //    }
-    //    catch
-    //    {
-    //        await transaction.RollbackAsync(cancellationToken);
-    //        throw;
-    //    }
-
-    //    return existingReport;
-    //}
+        return existingRisk;
+    }
 
     public async Task<PagedResults<Risk>> FetchAllBy(Guid? projectId, SafePageParameters pagingInfo, CancellationToken cancellationToken)
     {

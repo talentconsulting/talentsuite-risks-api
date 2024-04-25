@@ -39,7 +39,7 @@ internal static partial class WebApplicationBuilderExtensions
         builder.ConfigureHealthChecks(); // must come after db init
 
         builder.Services.AddAutoMapper(config => {
-            config.CreateMap<Risk, RiskDto>();
+            config.CreateMap<Risk, RiskDto>().ReverseMap();
             config.CreateMap(typeof(PagedResults<>), typeof(PagingInfoDto));
             config.CreateMap<CreateRiskRequest, Risk>();
         });
@@ -139,6 +139,7 @@ internal static partial class WebApplicationBuilderExtensions
 
         // Validators
         builder.Services.AddScoped<IValidator<CreateRiskRequest>, CreateRiskRequestValidator>();
+        builder.Services.AddScoped<IValidator<RiskDto>, RiskValidator>();
     }
 
     private static void ConfigureHealthChecks(this WebApplicationBuilder builder)
