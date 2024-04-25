@@ -15,10 +15,10 @@ internal class RisksProvider(IApplicationDbContext context) : IRisksProvider
     //    return report;
     //}
 
-    //public async Task<Risk?> Fetch(Guid reportId, CancellationToken cancellationToken)
-    //{
-    //    return await context.Risks.FindAsync([reportId], cancellationToken: cancellationToken);
-    //}
+    public async Task<Risk?> Fetch(Guid riskId, CancellationToken cancellationToken)
+    {
+        return await context.Risks.FindAsync([riskId], cancellationToken: cancellationToken);
+    }
 
     //public async Task<bool> Delete(Guid reportId, CancellationToken cancellationToken)
     //{
@@ -34,7 +34,7 @@ internal class RisksProvider(IApplicationDbContext context) : IRisksProvider
     //    }
     //    context.Remove(report);
     //    await context.SaveChangesAsync(cancellationToken);
-        
+
     //    return true;
     //}
 
