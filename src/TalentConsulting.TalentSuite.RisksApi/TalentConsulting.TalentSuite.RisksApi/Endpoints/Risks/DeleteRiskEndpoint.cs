@@ -5,30 +5,26 @@ using TalentConsulting.TalentSuite.RisksApi.Common.Dtos;
 
 namespace TalentConsulting.TalentSuite.RisksApi.Endpoints;
 
-internal sealed class GetRiskEndpoint
+internal sealed class DeleteRiskEndpoint
 {
     public static void Register(WebApplication app)
     {
-        app.MapGet("/risks/{id:guid}", GetRisk)
-            .Produces<Risk>(StatusCodes.Status200OK)
+        app.MapDelete("/risks/{id:guid}", DeleteRisk)
+            .Produces<Risk>(StatusCodes.Status204NoContent)
             .Produces(StatusCodes.Status404NotFound)
             .Produces(StatusCodes.Status400BadRequest)
             .WithTags("Risks")
-            .WithDescription("Query for a specific Risk")
+            .WithDescription("Delete a specific Risk")
             .WithOpenApi();
     }
 
-    private static async Task<IResult> GetRisk(
+    private static async Task<IResult> DeleteRisk(
         [FromServices] IRisksProvider risksProvider,
-        [FromServices] IMapper mapper,
         Guid id,
         CancellationToken cancellationToken)
     {
-        var risk = await risksProvider.Fetch(id, cancellationToken);
-        var result = mapper.Map<Risk>(risk);
-
-        return risk is null
-            ? Results.NotFound()
-            : TypedResults.Ok(result);
+        return await risksProvider.Delete(id, cancellationToken)
+            ? Results.NoContent()
+            : Results.NotFound();
     }
 }

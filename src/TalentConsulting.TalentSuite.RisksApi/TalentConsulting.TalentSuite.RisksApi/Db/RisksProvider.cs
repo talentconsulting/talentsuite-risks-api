@@ -20,23 +20,19 @@ internal class RisksProvider(IApplicationDbContext context) : IRisksProvider
         return await context.Risks.FindAsync([riskId], cancellationToken: cancellationToken);
     }
 
-    //public async Task<bool> Delete(Guid reportId, CancellationToken cancellationToken)
-    //{
-    //    var report = await Fetch(reportId, cancellationToken);
-    //    if (report is null)
-    //    {
-    //        return false;
-    //    }
+    public async Task<bool> Delete(Guid riskId, CancellationToken cancellationToken)
+    {
+        var risk = await Fetch(riskId, cancellationToken);
+        if (risk is null)
+        {
+            return false;
+        }
 
-    //    foreach (var risk in report.Risks)
-    //    {
-    //        context.Remove(risk);
-    //    }
-    //    context.Remove(report);
-    //    await context.SaveChangesAsync(cancellationToken);
+        context.Remove(risk);
+        await context.SaveChangesAsync(cancellationToken);
 
-    //    return true;
-    //}
+        return true;
+    }
 
     //public async Task<Risk?> Update(Risk report, CancellationToken cancellationToken)
     //{

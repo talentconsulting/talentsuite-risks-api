@@ -8,8 +8,8 @@ namespace TalentConsulting.TalentSuite.RisksApi.Endpoints;
 
 internal sealed class GetRisksEndpoint
 {
-    internal record InfoResponse(string Version);
-    
+    internal record struct GetRisksResponse(PagingInfo PagingInfo, IEnumerable<Risk> Risks);
+
     public static void Register(WebApplication app)
     {
         app.MapGet("/risks", GetRisks)

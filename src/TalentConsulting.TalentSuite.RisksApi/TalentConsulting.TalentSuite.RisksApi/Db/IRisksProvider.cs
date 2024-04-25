@@ -6,7 +6,7 @@ namespace TalentConsulting.TalentSuite.ReportsApi.Db;
 internal interface IRisksProvider
 {
     Task<PagedResults<Risk>> FetchAllBy(Guid? projectId, SafePageParameters pagingInfo, CancellationToken cancellationToken);
-    //Task<bool> Delete(Guid reportId, CancellationToken cancellationToken);
+    Task<bool> Delete(Guid riskId, CancellationToken cancellationToken);
     Task<Risk?> Fetch(Guid riskId, CancellationToken cancellationToken);
     //Task<Risk?> Update(Risk report, CancellationToken cancellationToken);
     //Task<Risk> Create(Risk report, CancellationToken cancellationToken);
