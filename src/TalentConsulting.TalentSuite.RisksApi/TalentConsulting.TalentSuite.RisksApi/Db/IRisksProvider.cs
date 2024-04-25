@@ -9,5 +9,5 @@ internal interface IRisksProvider
     Task<bool> Delete(Guid riskId, CancellationToken cancellationToken);
     Task<Risk?> Fetch(Guid riskId, CancellationToken cancellationToken);
     //Task<Risk?> Update(Risk report, CancellationToken cancellationToken);
-    //Task<Risk> Create(Risk report, CancellationToken cancellationToken);
+    Task<Risk> Create(Risk risk, CancellationToken cancellationToken);
 }

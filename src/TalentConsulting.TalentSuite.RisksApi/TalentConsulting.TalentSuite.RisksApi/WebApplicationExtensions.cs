@@ -12,6 +12,7 @@ public static partial class WebApplicationExtensions
     {
         GetRisksEndpoint.Register(app);
         GetRiskEndpoint.Register(app);
+        PostRiskEndpoint.Register(app);
         DeleteRiskEndpoint.Register(app);
         GetReadinessEndpoint.Register(app);
     }

@@ -7,13 +7,13 @@ namespace TalentConsulting.TalentSuite.RisksApi.Db;
 
 internal class RisksProvider(IApplicationDbContext context) : IRisksProvider
 {
-    //public async Task<Risk> Create(Risk report, CancellationToken cancellationToken)
-    //{
-    //    context.Risks.Add(report);
-    //    await context.SaveChangesAsync(cancellationToken);
+    public async Task<Risk> Create(Risk risk, CancellationToken cancellationToken)
+    {
+        context.Risks.Add(risk);
+        await context.SaveChangesAsync(cancellationToken);
 
-    //    return report;
-    //}
+        return risk;
+    }
 
     public async Task<Risk?> Fetch(Guid riskId, CancellationToken cancellationToken)
     {

@@ -13,6 +13,9 @@ using RiskDto = TalentConsulting.TalentSuite.RisksApi.Common.Dtos.Risk;
 using PagingInfoDto = TalentConsulting.TalentSuite.RisksApi.Common.Dtos.PagingInfo;
 using TalentConsulting.TalentSuite.RisksApi.Db;
 using TalentConsulting.TalentSuite.RisksApi.Db.Entities;
+using TalentConsulting.TalentSuite.RisksApi.Common.Validators;
+using static TalentConsulting.TalentSuite.RisksApi.Endpoints.PostRiskEndpoint;
+using FluentValidation;
 
 namespace TalentConsulting.TalentSuite.RisksApi;
 
@@ -38,6 +41,7 @@ internal static partial class WebApplicationBuilderExtensions
         builder.Services.AddAutoMapper(config => {
             config.CreateMap<Risk, RiskDto>();
             config.CreateMap(typeof(PagedResults<>), typeof(PagingInfoDto));
+            config.CreateMap<CreateRiskRequest, Risk>();
         });
     }
 
@@ -134,10 +138,7 @@ internal static partial class WebApplicationBuilderExtensions
         builder.Services.AddScoped<IRisksProvider, RisksProvider>();
 
         // Validators
-        //builder.Services.AddScoped<IValidator<CreateReportDto>, CreateReportDtoValidator>();
-        //builder.Services.AddScoped<IValidator<CreateRiskDto>, CreateRiskDtoValidator>();
-        //builder.Services.AddScoped<IValidator<UpdateReportDto>, UpdateReportDtoValidator>();
-        //builder.Services.AddScoped<IValidator<UpdateRiskDto>, UpdateRiskDtoValidator>();
+        builder.Services.AddScoped<IValidator<CreateRiskRequest>, CreateRiskRequestValidator>();
     }
 
     private static void ConfigureHealthChecks(this WebApplicationBuilder builder)
