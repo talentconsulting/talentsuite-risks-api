@@ -16,6 +16,7 @@ using TalentConsulting.TalentSuite.RisksApi.Db.Entities;
 using TalentConsulting.TalentSuite.RisksApi.Common.Validators;
 using static TalentConsulting.TalentSuite.RisksApi.Endpoints.PostRiskEndpoint;
 using FluentValidation;
+using System.Security;
 
 namespace TalentConsulting.TalentSuite.RisksApi;
 
@@ -73,6 +74,11 @@ internal static partial class WebApplicationBuilderExtensions
         })
         .AddJwtBearer(options =>
         {
+            if (string.IsNullOrEmpty(builder.Configuration["JWT:Secret"]))
+            {
+                throw new SecurityException("The JWT:Secret configuration value must be set");
+            }
+
             // Adding Jwt Bearer
             options.SaveToken = true;
             options.TokenValidationParameters = new TokenValidationParameters()
@@ -81,8 +87,7 @@ internal static partial class WebApplicationBuilderExtensions
                 ValidateAudience = true,
                 ValidAudience = builder.Configuration["JWT:ValidAudience"],
                 ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
-                    builder.Configuration["JWT:Secret"] ?? "JWTAuthenticationHIGHsecuredPasswordVVVp1OH7Xzyr"))
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]!))
             };
         });
 
