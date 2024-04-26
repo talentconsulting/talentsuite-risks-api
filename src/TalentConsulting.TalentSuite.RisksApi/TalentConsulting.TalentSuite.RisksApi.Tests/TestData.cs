@@ -61,13 +61,23 @@ internal class TestData
             },
         ];
 
-        internal static IEnumerable<Risk> GenerateNewReports(int count)
+        internal static IEnumerable<Risk> GenerateNewRisks(int count)
         {
-            return GenerateNewRisks(count, ProjectId);
+            return TestData.GenerateNewRisks(count, ProjectId);
         }
     }
 
-    private static IEnumerable<Risk> GenerateNewRisks(int count, Guid projectId)
+    public static class Project2
+    {
+        public static readonly Guid ProjectId = TestContext.CurrentContext.Random.NextGuid();
+
+        internal static IEnumerable<Risk> GenerateNewRisks(int count)
+        {
+            return TestData.GenerateNewRisks(count, ProjectId);
+        }
+    }
+
+        private static IEnumerable<Risk> GenerateNewRisks(int count, Guid projectId)
     {
         return Enumerable.Range(1, count).Select(x => new Risk()
         {

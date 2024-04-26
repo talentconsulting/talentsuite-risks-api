@@ -1,7 +1,7 @@
 using AutoMapper;
 using TalentConsulting.TalentSuite.RisksApi.Common.Dtos;
 
-namespace TalentConsulting.TalentSuite.RisksApi.Tests.Endpoints.Reports;
+namespace TalentConsulting.TalentSuite.RisksApi.Tests.Endpoints.Risks;
 
 [TestFixture]
 public class GetRiskEndpointTests : ServerFixtureBase

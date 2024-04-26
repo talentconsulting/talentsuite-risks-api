@@ -1,6 +1,6 @@
 using TalentConsulting.TalentSuite.RisksApi.Db.Entities;
 
-namespace TalentConsulting.TalentSuite.RisksApi.Tests.Endpoints.Reports;
+namespace TalentConsulting.TalentSuite.RisksApi.Tests.Endpoints.Risks;
 
 [TestFixture]
 public class DeleteRiskEndpointTests : ServerFixtureBase

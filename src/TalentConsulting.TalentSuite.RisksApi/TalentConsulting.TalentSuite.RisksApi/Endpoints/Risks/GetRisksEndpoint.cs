@@ -10,7 +10,7 @@ internal sealed class GetRisksEndpoint
 {
     internal record struct PagingParametersDto(int Page, int PageSize);
     internal record struct PagingResults(int TotalCount, int Page, int PageSize, int First, int Last);
-    internal record struct GetRisksResponse(PagingResults PagingInfo, IEnumerable<RiskDto> Risks);
+    internal record struct GetRisksResponse(PagingResults PagingResults, IEnumerable<RiskDto> Risks);
 
     public static void Register(WebApplication app)
     {
