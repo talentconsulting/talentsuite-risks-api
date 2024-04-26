@@ -10,7 +10,7 @@ internal sealed class GetRiskEndpoint
     public static void Register(WebApplication app)
     {
         app.MapGet("/risks/{id:guid}", GetRisk)
-            .Produces<Risk>(StatusCodes.Status200OK)
+            .Produces<RiskDto>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound)
             .WithTags("Risks")
             .WithDescription("Query for a specific Risk")
@@ -26,6 +26,6 @@ internal sealed class GetRiskEndpoint
         var risk = await risksProvider.Fetch(id, cancellationToken);
         return risk is null
             ? Results.NotFound()
-            : TypedResults.Ok(mapper.Map<Risk>(risk));
+            : TypedResults.Ok(mapper.Map<RiskDto>(risk));
     }
 }

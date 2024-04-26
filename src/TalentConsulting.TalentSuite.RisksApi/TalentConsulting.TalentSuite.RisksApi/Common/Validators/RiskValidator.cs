@@ -3,7 +3,7 @@ using TalentConsulting.TalentSuite.RisksApi.Common.Dtos;
 
 namespace TalentConsulting.TalentSuite.RisksApi.Common.Validators;
 
-internal class RiskValidator : AbstractValidator<Risk>
+internal class RiskValidator : AbstractValidator<RiskDto>
 {
     public RiskValidator()
     {

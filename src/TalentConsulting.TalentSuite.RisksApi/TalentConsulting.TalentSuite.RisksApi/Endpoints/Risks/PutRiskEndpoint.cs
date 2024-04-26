@@ -3,7 +3,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using TalentConsulting.TalentSuite.RisksApi.Db;
 using TalentConsulting.TalentSuite.RisksApi.Db.Entities;
-using RiskDto = TalentConsulting.TalentSuite.RisksApi.Common.Dtos.Risk;
+using TalentConsulting.TalentSuite.RisksApi.Common.Dtos;
 
 namespace TalentConsulting.TalentSuite.RisksApi.Endpoints;
 

@@ -1,6 +1,5 @@
 using AutoMapper;
 using TalentConsulting.TalentSuite.RisksApi.Common.Dtos;
-using RiskDto = TalentConsulting.TalentSuite.RisksApi.Common.Dtos.Risk;
 
 namespace TalentConsulting.TalentSuite.RisksApi.Tests.Endpoints.Reports;
 

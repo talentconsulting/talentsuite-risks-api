@@ -8,7 +8,9 @@ namespace TalentConsulting.TalentSuite.RisksApi.Endpoints;
 
 internal sealed class GetRisksEndpoint
 {
-    internal record struct GetRisksResponse(PagingInfo PagingInfo, IEnumerable<Risk> Risks);
+    internal record struct PagingParametersDto(int Page, int PageSize);
+    internal record struct PagingResults(int TotalCount, int Page, int PageSize, int First, int Last);
+    internal record struct GetRisksResponse(PagingResults PagingInfo, IEnumerable<RiskDto> Risks);
 
     public static void Register(WebApplication app)
     {
@@ -30,8 +32,8 @@ internal sealed class GetRisksEndpoint
         var safePageParams = new SafePageParameters(page, pageSize);
         var results = await risksProvider.FetchAllBy(projectId, safePageParams, cancellationToken);
 
-        var pagingInfo = mapper.Map<PagingInfo>(results);
-        var risks = mapper.Map<IEnumerable<Risk>>(results.Results);
+        var pagingInfo = mapper.Map<PagingResults>(results);
+        var risks = mapper.Map<IEnumerable<RiskDto>>(results.Results);
         var response = new GetRisksResponse(pagingInfo, risks);
 
         return TypedResults.Ok(response);

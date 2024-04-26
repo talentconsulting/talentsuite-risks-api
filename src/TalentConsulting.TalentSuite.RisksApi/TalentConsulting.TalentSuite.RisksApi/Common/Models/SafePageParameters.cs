@@ -1,4 +1,4 @@
-﻿using TalentConsulting.TalentSuite.RisksApi.Common.Dtos;
+﻿using static TalentConsulting.TalentSuite.RisksApi.Endpoints.GetRisksEndpoint;
 
 namespace TalentConsulting.TalentSuite.RisksApi.Common.Models;
 
@@ -7,5 +7,5 @@ internal record struct SafePageParameters(int? RequestedPage, int? RequestedPage
     public readonly int Page => Math.Clamp(RequestedPage ?? 1, 1, 999);
     public readonly int PageSize => Math.Clamp(RequestedPageSize ?? 10, 1, 100);
 
-    public static SafePageParameters From(PagingParameters parameters) => new (parameters.Page, parameters.PageSize);
+    public static SafePageParameters From(PagingParametersDto parameters) => new (parameters.Page, parameters.PageSize);
 };

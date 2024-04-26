@@ -2,7 +2,7 @@
 
 namespace TalentConsulting.TalentSuite.RisksApi.Common.Dtos;
 
-public record struct Risk(
+public record struct RiskDto(
     Guid Id,
     Guid ProjectId,
     string Description,

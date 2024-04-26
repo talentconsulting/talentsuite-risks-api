@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TalentConsulting.TalentSuite.RisksApi.Db;
 using TalentConsulting.TalentSuite.RisksApi.Common.Dtos;
 
@@ -10,7 +9,7 @@ internal sealed class DeleteRiskEndpoint
     public static void Register(WebApplication app)
     {
         app.MapDelete("/risks/{id:guid}", DeleteRisk)
-            .Produces<Risk>(StatusCodes.Status204NoContent)
+            .Produces<RiskDto>(StatusCodes.Status204NoContent)
             .Produces(StatusCodes.Status404NotFound)
             .Produces(StatusCodes.Status400BadRequest)
             .WithTags("Risks")

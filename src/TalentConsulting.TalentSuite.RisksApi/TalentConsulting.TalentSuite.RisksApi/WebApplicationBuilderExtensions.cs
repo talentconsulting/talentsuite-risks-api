@@ -9,7 +9,7 @@ using Serilog.Events;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using TalentConsulting.TalentSuite.RisksApi.Db;
-using RiskDto = TalentConsulting.TalentSuite.RisksApi.Common.Dtos.Risk;
+using TalentConsulting.TalentSuite.RisksApi.Common.Dtos;
 using TalentConsulting.TalentSuite.RisksApi.Common.Validators;
 using static TalentConsulting.TalentSuite.RisksApi.Endpoints.PostRiskEndpoint;
 using FluentValidation;
@@ -27,6 +27,7 @@ internal static partial class WebApplicationBuilderExtensions
         {
             options.SwaggerDoc("v1", new OpenApiInfo { Title = "Reports API", Version = "v1" });
             options.DocumentFilter<HealthChecksFilter>();
+            options.CustomSchemaIds(OpenApiSchemaUtils.RenameDtoStrategy);
         });
         builder.ConfigureSerilog();
         builder.Services.AddApplicationInsightsTelemetry();
