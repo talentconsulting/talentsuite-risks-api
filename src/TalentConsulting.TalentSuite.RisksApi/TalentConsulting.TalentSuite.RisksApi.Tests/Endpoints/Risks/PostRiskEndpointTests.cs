@@ -42,6 +42,8 @@ public class PostRiskEndpointTests : ServerFixtureBase
             var userId = TestContext.CurrentContext.Random.NextGuid().ToString();
             var reportId = TestContext.CurrentContext.Random.NextGuid().ToString();
             var risk = new TestCreateRiskDto(projectId, "description", "impact", reportId, userId, RiskStatus.Green.ToString());
+            var tooLongText = TestContext.CurrentContext.Random.GetString(10001);
+
 
             yield return new object[] { risk with { ProjectId = empty }, "'Project Id' must not be empty" };
             yield return new object[] { risk with { ProjectId = null }, "BadHttpRequestException" };
@@ -49,16 +51,18 @@ public class PostRiskEndpointTests : ServerFixtureBase
             
             yield return new object[] { risk with { Description = null }, "'Description' must not be empty" };
             yield return new object[] { risk with { Description = string.Empty }, "'Description' must not be empty" };
+            yield return new object[] { risk with { Description = tooLongText }, $"The length of 'Description' must be {Risk.MaxDescriptionLength} characters or fewer. You entered {tooLongText.Length} characters." };
             
+            yield return new object[] { risk with { Impact = null }, "'Impact' must not be empty" };
+            yield return new object[] { risk with { Impact = string.Empty }, "'Impact' must not be empty" };
+            yield return new object[] { risk with { Impact = tooLongText }, $"The length of 'Impact' must be {Risk.MaxImpactLength} characters or fewer. You entered {tooLongText.Length} characters." };
+
             yield return new object[] { risk with { CreatedByReportId = null }, "BadHttpRequestException" };
             yield return new object[] { risk with { CreatedByReportId = "Invalid" }, "BadHttpRequestException" };
             
             yield return new object[] { risk with { CreatedByUserId = null }, "BadHttpRequestException" };
             yield return new object[] { risk with { CreatedByUserId = "Invalid" }, "BadHttpRequestException" };
 
-            yield return new object[] { risk with { Impact = null }, "'Impact' must not be empty" };
-            yield return new object[] { risk with { Impact = string.Empty }, "'Impact' must not be empty" };
-            
             yield return new object[] { risk with { Status = string.Empty }, "BadHttpRequestException" };
             yield return new object[] { risk with { Status = "Invalid" }, "BadHttpRequestException" };
             yield return new object[] { risk with { Status = null }, "BadHttpRequestException" };

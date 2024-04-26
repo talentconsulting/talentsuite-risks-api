@@ -24,6 +24,9 @@ public enum RiskState
 [Table("risks")]
 public class Risk
 {
+    public static readonly int MaxDescriptionLength = 10000;
+    public static readonly int MaxImpactLength = 10000;
+
     public Guid Id { get; set; }
     public Guid ProjectId { get; set; }
 
