@@ -14,6 +14,7 @@ using TalentConsulting.TalentSuite.RisksApi.Common.Validators;
 using static TalentConsulting.TalentSuite.RisksApi.Endpoints.PostRiskEndpoint;
 using FluentValidation;
 using System.Security;
+using static TalentConsulting.TalentSuite.RisksApi.Endpoints.PutRiskEndpoint;
 
 namespace TalentConsulting.TalentSuite.RisksApi;
 
@@ -138,6 +139,7 @@ internal static partial class WebApplicationBuilderExtensions
 
         // Validators
         builder.Services.AddScoped<IValidator<CreateRiskRequest>, CreateRiskRequestValidator>();
+        builder.Services.AddScoped<IValidator<UpdateRiskRequest>, UpdateRiskRequestValidator>();
         builder.Services.AddScoped<IValidator<RiskDto>, RiskValidator>();
     }
 

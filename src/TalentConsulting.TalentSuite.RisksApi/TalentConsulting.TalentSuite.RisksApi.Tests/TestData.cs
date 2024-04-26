@@ -13,6 +13,8 @@ internal class TestData
             {
                 Id = TestContext.CurrentContext.Random.NextGuid(),
                 ProjectId = ProjectId,
+                Description = "A description",
+                Impact = "Impact info",
                 CreatedByReportId = TestContext.CurrentContext.Random.NextGuid(),
                 CreatedByUserId = TestContext.CurrentContext.Random.NextGuid(),
                 CreatedWhen = DateTime.UtcNow,
@@ -23,6 +25,8 @@ internal class TestData
             {
                 Id = TestContext.CurrentContext.Random.NextGuid(),
                 ProjectId = ProjectId,
+                Description = "A description",
+                Impact = "Impact info",
                 CreatedByReportId = TestContext.CurrentContext.Random.NextGuid(),
                 CreatedByUserId = TestContext.CurrentContext.Random.NextGuid(),
                 CreatedWhen = DateTime.UtcNow,
@@ -33,6 +37,8 @@ internal class TestData
             {
                 Id = TestContext.CurrentContext.Random.NextGuid(),
                 ProjectId = ProjectId,
+                Description = "A description",
+                Impact = "Impact info",
                 CreatedByReportId = TestContext.CurrentContext.Random.NextGuid(),
                 CreatedByUserId = TestContext.CurrentContext.Random.NextGuid(),
                 CreatedWhen = DateTime.UtcNow,
@@ -43,6 +49,8 @@ internal class TestData
             {
                 Id = TestContext.CurrentContext.Random.NextGuid(),
                 ProjectId = ProjectId,
+                Description = "A description",
+                Impact = "Impact info",
                 CreatedByReportId = TestContext.CurrentContext.Random.NextGuid(),
                 CreatedByUserId = TestContext.CurrentContext.Random.NextGuid(),
                 CreatedWhen = DateTime.UtcNow,
@@ -53,6 +61,8 @@ internal class TestData
             {
                 Id = TestContext.CurrentContext.Random.NextGuid(),
                 ProjectId = ProjectId,
+                Description = "A description",
+                Impact = "Impact info",
                 CreatedByReportId = TestContext.CurrentContext.Random.NextGuid(),
                 CreatedByUserId = TestContext.CurrentContext.Random.NextGuid(),
                 CreatedWhen = DateTime.UtcNow,

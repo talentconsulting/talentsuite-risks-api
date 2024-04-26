@@ -42,8 +42,7 @@ public class PostRiskEndpointTests : ServerFixtureBase
             var userId = TestContext.CurrentContext.Random.NextGuid().ToString();
             var reportId = TestContext.CurrentContext.Random.NextGuid().ToString();
             var risk = new TestCreateRiskDto(projectId, "description", "impact", reportId, userId, RiskStatus.Green.ToString());
-            var tooLongText = TestContext.CurrentContext.Random.GetString(10001);
-
+            var tooLongText = TestContext.CurrentContext.Random.GetString(Math.Max(Risk.MaxDescriptionLength, Risk.MaxImpactLength) + 1);
 
             yield return new object[] { risk with { ProjectId = empty }, "'Project Id' must not be empty" };
             yield return new object[] { risk with { ProjectId = null }, "BadHttpRequestException" };
