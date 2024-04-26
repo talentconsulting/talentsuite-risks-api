@@ -16,6 +16,7 @@ internal sealed class GetRisksEndpoint
     {
         app.MapGet("/risks", GetRisks)
             .Produces<GetRisksResponse>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status400BadRequest)
             .WithTags("Risks")
             .WithDescription("Returns a list of risks per the query parameters")
             .WithOpenApi();

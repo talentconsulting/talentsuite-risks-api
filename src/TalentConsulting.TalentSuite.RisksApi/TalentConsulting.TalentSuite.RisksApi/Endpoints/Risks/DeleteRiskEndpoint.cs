@@ -9,9 +9,8 @@ internal sealed class DeleteRiskEndpoint
     public static void Register(WebApplication app)
     {
         app.MapDelete("/risks/{id:guid}", DeleteRisk)
-            .Produces<RiskDto>(StatusCodes.Status204NoContent)
+            .Produces(StatusCodes.Status204NoContent)
             .Produces(StatusCodes.Status404NotFound)
-            .Produces(StatusCodes.Status400BadRequest)
             .WithTags("Risks")
             .WithDescription("Delete a specific Risk")
             .WithOpenApi();

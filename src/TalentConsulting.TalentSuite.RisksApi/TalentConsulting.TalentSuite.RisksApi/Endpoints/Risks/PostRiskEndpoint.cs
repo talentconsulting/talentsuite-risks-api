@@ -23,7 +23,7 @@ internal sealed class PostRiskEndpoint
             .Produces(StatusCodes.Status201Created)
             .Produces(StatusCodes.Status400BadRequest)
             .WithTags("Risks")
-            .WithDescription("Query for a specific Risk")
+            .WithDescription("Create a Risk")
             .WithOpenApi();
     }
 

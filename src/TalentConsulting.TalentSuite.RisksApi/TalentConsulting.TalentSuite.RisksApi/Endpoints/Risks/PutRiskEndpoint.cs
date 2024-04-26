@@ -26,7 +26,7 @@ internal sealed class PutRiskEndpoint
             .Produces(StatusCodes.Status400BadRequest)
             .Produces(StatusCodes.Status404NotFound)
             .WithTags("Risks")
-            .WithDescription("Query for a specific Risk")
+            .WithDescription("Update a specific Risk")
             .WithOpenApi();
     }
 
