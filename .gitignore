@@ -146,6 +146,11 @@ _TeamCity*
 *.coverage
 *.coveragexml
 
+# Coverlet is a free, cross platform Code Coverage Tool
+coverage*.json
+coverage*.xml
+coverage*.info
+
 # NCrunch
 _NCrunch_*
 .*crunch*.local.xml
