@@ -14,11 +14,6 @@ internal sealed class PostRiskEndpoint
         string Impact,
         Guid CreatedByReportId,
         Guid CreatedByUserId,
-        DateTime CreatedWhen,
-        Guid? ResolvedByReportId,
-        Guid? ResolvedBy,
-        DateTime? ResolvedWhen,
-        RiskState State,
         RiskStatus Status
     );
 
@@ -47,6 +42,8 @@ internal sealed class PostRiskEndpoint
         }
 
         var risk = mapper.Map<Risk>(createRiskRequest);
+        risk.CreatedWhen = DateTime.UtcNow;
+        risk.State = RiskState.New;
         risk = await risksProvider.Create(risk, cancellationToken);
 
         http.Response.Headers.Location = $"/risks/{risk.Id}";

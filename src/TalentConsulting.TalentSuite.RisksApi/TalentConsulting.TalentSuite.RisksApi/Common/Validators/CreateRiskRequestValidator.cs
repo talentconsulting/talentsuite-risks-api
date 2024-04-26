@@ -12,6 +12,5 @@ internal class CreateRiskRequestValidator : AbstractValidator<CreateRiskRequest>
         RuleFor(dto => dto.Impact).NotEmpty();
         RuleFor(dto => dto.CreatedByReportId).NotEmpty();
         RuleFor(dto => dto.CreatedByUserId).NotEmpty();
-        RuleFor(dto => dto.CreatedWhen).NotEmpty();
     }
 }
