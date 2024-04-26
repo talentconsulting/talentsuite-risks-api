@@ -41,6 +41,12 @@ internal class RisksProvider(IApplicationDbContext context) : IRisksProvider
             return null;
         }
 
+        // Persist these fields
+        risk.ProjectId = existingRisk.ProjectId;
+        risk.CreatedByReportId = existingRisk.CreatedByReportId;
+        risk.CreatedByUserId = existingRisk.CreatedByUserId;
+        risk.CreatedWhen = existingRisk.CreatedWhen;
+
         context.Entry(existingRisk).CurrentValues.SetValues(risk);
         await context.SaveChangesAsync(cancellationToken);
 

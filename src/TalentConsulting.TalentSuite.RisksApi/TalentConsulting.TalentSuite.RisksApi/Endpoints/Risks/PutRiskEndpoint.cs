@@ -3,12 +3,22 @@ using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using TalentConsulting.TalentSuite.RisksApi.Db;
 using TalentConsulting.TalentSuite.RisksApi.Db.Entities;
-using TalentConsulting.TalentSuite.RisksApi.Common.Dtos;
 
 namespace TalentConsulting.TalentSuite.RisksApi.Endpoints;
 
 internal sealed class PutRiskEndpoint
 {
+    public record struct UpdateRiskRequest(
+        Guid Id,
+        string Description,
+        string Impact,
+        Guid? ResolvedByReportId,
+        Guid? ResolvedByUserId,
+        DateTime? ResolvedWhen,
+        RiskState State,
+        RiskStatus Status
+    );
+
     public static void Register(WebApplication app)
     {
         app.MapPut("/risks", PutRisk)
@@ -22,9 +32,9 @@ internal sealed class PutRiskEndpoint
 
     private static async Task<IResult> PutRisk(
         [FromServices] IRisksProvider risksProvider,
-        [FromServices] IValidator<RiskDto> validator,
+        [FromServices] IValidator<UpdateRiskRequest> validator,
         [FromServices] IMapper mapper,
-        [FromBody] RiskDto riskDto,
+        [FromBody] UpdateRiskRequest riskDto,
         CancellationToken cancellationToken)
     {
         var results = validator.Validate(riskDto);
