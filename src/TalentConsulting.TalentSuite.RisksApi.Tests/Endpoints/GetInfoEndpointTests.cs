@@ -3,22 +3,6 @@ using TalentConsulting.TalentSuite.RisksApi.Endpoints;
 
 namespace TalentConsulting.TalentSuite.RisksApi.Tests.Endpoints;
 
-[SetUpFixture]
-public class SetupTrace
-{
-    [OneTimeSetUp]
-    public void StartTest()
-    {
-        Trace.Listeners.Add(new ConsoleTraceListener());
-    }
-
-    [OneTimeTearDown]
-    public void EndTest()
-    {
-        Trace.Flush();
-    }
-}
-
 internal class GetInfoEndpointTests : ServerFixtureBase
 {
     [Test]
@@ -38,16 +22,6 @@ internal class GetInfoEndpointTests : ServerFixtureBase
         using var response = await Client.GetAsync("/info");
 
         var responseText = await response.Content.ReadAsStringAsync();
-        TestContext.Out.WriteLine(responseText);
-        TestContext.Out.Flush();
-        TestContext.WriteLine("***********************************************************************************");
-        TestContext.WriteLine("***********************************************************************************");
-        TestContext.WriteLine("***********************************************************************************");
-        TestContext.WriteLine("***********************************************************************************");
-        TestContext.WriteLine("***********************************************************************************");
-        TestContext.WriteLine(responseText);
-        Console.WriteLine(responseText);
-
         var info = await response.Content.ReadFromJsonAsync<GetInfoEndpoint.InfoResponse>();
 
         // assert
