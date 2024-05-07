@@ -1,6 +1,23 @@
-﻿using TalentConsulting.TalentSuite.RisksApi.Endpoints;
+﻿using System.Diagnostics;
+using TalentConsulting.TalentSuite.RisksApi.Endpoints;
 
 namespace TalentConsulting.TalentSuite.RisksApi.Tests.Endpoints;
+
+[SetUpFixture]
+public class SetupTrace
+{
+    [OneTimeSetUp]
+    public void StartTest()
+    {
+        Trace.Listeners.Add(new ConsoleTraceListener());
+    }
+
+    [OneTimeTearDown]
+    public void EndTest()
+    {
+        Trace.Flush();
+    }
+}
 
 internal class GetInfoEndpointTests : ServerFixtureBase
 {
