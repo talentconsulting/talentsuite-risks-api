@@ -29,6 +29,7 @@ internal class GetInfoEndpointTests : ServerFixtureBase
         TestContext.WriteLine("***********************************************************************************");
         TestContext.WriteLine("***********************************************************************************");
         TestContext.WriteLine(responseText);
+        Console.WriteLine(responseText);
 
         var info = await response.Content.ReadFromJsonAsync<GetInfoEndpoint.InfoResponse>();
 
