@@ -39,7 +39,6 @@ public class GetRiskEndpointTests : ServerFixtureBase
 
         // assert
         response.StatusCode.ShouldBe(HttpStatusCode.OK);
-
         actual.ShouldBeEquivalentTo(_mapper.Map<RiskDto>(expected));
     }
 }

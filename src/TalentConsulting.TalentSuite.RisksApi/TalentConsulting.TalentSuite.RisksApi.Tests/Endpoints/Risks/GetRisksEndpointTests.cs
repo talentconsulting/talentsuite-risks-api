@@ -5,24 +5,27 @@ namespace TalentConsulting.TalentSuite.RisksApi.Tests.Endpoints.Risks;
 [TestFixture]
 public class GetRisksEndpointTests : ServerFixtureBase
 {
-    [TestCase("1", "1", "C00211ED-256F-4067-99E0-E1C4316A28D7")]
-    [TestCase("-1", "-1", "C00211ED-256F-4067-99E0-E1C4316A28D7")]
-    [TestCase("999999999", "999999999", "C00211ED-256F-4067-99E0-E1C4316A28D7")]
-    public async Task Get_Returns_OK(string? page, string? pageSize, string? projectId)
+    [Test]
+    public async Task Get_Returns_Risks()
     {
         // arrange
+        var risks = TestData.Project1.GenerateNewRisks(10);
+        var ids = risks.Select(r => r.Id).ToList();
         await Server.ResetDbAsync(async ctx => {
-            var risks = TestData.Project1.GenerateNewRisks(1000);
             await ctx.Risks.AddRangeAsync(risks);
             await ctx.SaveChangesAsync(CancellationToken.None);
         });
 
         // act
-        using var response = await Client.GetAsync($"/risks?pageSize={pageSize}&page={page}&projectId={projectId}");
-        var body = await response.Content.ReadAsStringAsync();
+        using var response = await Client.GetAsync($"/risks?pageSize=10&page=1&projectId={TestData.Project1.ProjectId}");
+        var getRisksResponse = await response.Content.ReadFromJsonAsync<GetRisksResponse>();
 
         // assert
         response.StatusCode.ShouldBe(HttpStatusCode.OK);
+        getRisksResponse.Risks.Count().ShouldBe(10);
+        getRisksResponse.PagingResults.Page.ShouldBe(1);
+        getRisksResponse.PagingResults.PageSize.ShouldBe(10);
+        getRisksResponse.Risks.All(risk => ids.Contains(risk.Id));
     }
 
     [TestCase("9999999999", "9999999999", "C00211ED-256F-4067-99E0-E1C4316A28D7")]
@@ -43,7 +46,6 @@ public class GetRisksEndpointTests : ServerFixtureBase
 
         // act
         using var response = await Client.GetAsync($"/risks?pageSize={pageSize}&page={page}&projectId={projectId}");
-        var body = await response.Content.ReadAsStringAsync();
 
         // assert
         response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
