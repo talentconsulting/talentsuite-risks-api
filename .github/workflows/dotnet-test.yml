@@ -17,6 +17,8 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+    - name: Set environment var
+      run: echo "JWT:Secret=Super secret" >> $GITHUB_ENV
     - name: Restore dependencies
       run: dotnet restore
       working-directory: ${{env.working-directory}}
