@@ -19,6 +19,12 @@ internal class GetInfoEndpointTests : ServerFixtureBase
     {
         // act
         using var response = await Client.GetAsync("/info");
+
+        if (response.StatusCode != HttpStatusCode.OK)
+        {
+            TestContext.Out.WriteLine(await response.Content.ReadAsStringAsync());
+        }
+
         var info = await response.Content.ReadFromJsonAsync<GetInfoEndpoint.InfoResponse>();
 
         // assert
