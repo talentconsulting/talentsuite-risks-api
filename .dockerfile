@@ -1,0 +1,19 @@
+# Base Image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+USER app
+WORKDIR /app
+EXPOSE 80 443
+
+# Build & publish
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+COPY ./src ./src
+WORKDIR ./src/TalentConsulting.TalentSuite.RisksApi
+
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish ./TalentConsulting.TalentSuite.RisksApi.csproj -c $BUILD_CONFIGURATION -o /app/publish -p:UseAppHost=false
+
+# Build runtime image
+FROM base AS final
+WORKDIR /app
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "TalentConsulting.TalentSuite.RisksApi.dll"]

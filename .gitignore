@@ -142,14 +142,14 @@ _TeamCity*
 .axoCover/*
 !.axoCover/settings.json
 
+# Visual Studio code coverage results
+*.coverage
+*.coveragexml
+
 # Coverlet is a free, cross platform Code Coverage Tool
 coverage*.json
 coverage*.xml
 coverage*.info
-
-# Visual Studio code coverage results
-*.coverage
-*.coveragexml
 
 # NCrunch
 _NCrunch_*
@@ -375,6 +375,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+#Sonarqube
+.sonarqube/
 
 # VS Code files for those working on multiple tools
 .vscode/*
